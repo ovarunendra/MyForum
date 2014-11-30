@@ -1,0 +1,10 @@
+{
+    "name": "my-forum",
+    "version": "0.0.1",
+    "dependencies": {
+        "body-parser": "^1.9.2",
+        "cors": "^2.5.1",
+        "express": "^4.10.1",
+        "mongodb": "^1.4.19"
+    }
+}
