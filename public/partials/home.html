@@ -3,8 +3,7 @@
 </div>
 
 <div ng-repeat="post in ctrl.posts | orderBy:'-upvotes'">
-        <span class="glyphicon glyphicon-thumbs-up"
-              ng-click="ctrl.incrementUpvotes(post)"></span>
+        Likes <a ng-click="ctrl.incrementUpvotes(post)"><i class="fa fa-thumbs-o-up"></i></a>
     <span ng-bind="post.upvotes"></span>
         <span style="font-size:20px; margin-left:10px;">
               <span ng-bind="post.title"></span>

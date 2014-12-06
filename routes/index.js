@@ -81,6 +81,13 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
         res.json(comment);
     });
 });
+router.put('/posts/:post/comments/:comment/downvote', function(req, res, next) {
+    req.comment.downvote(function(err, comment){
+        if (err) { return next(err); }
+
+        res.json(comment);
+    });
+});
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });

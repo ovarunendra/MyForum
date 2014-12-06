@@ -63,6 +63,12 @@ angular.module('myForum', ['ui.router'])
                 .success(function(data){
                     comment.upvotes += 1;
                 });
+        }
+        obj.downvoteComment = function(post, comment) {
+            return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/downvote')
+                .success(function(data){
+                    comment.downvotes += 1;
+                });
         };
         return obj;
     }])
@@ -101,5 +107,8 @@ angular.module('myForum', ['ui.router'])
             };
             postCtrl.incrementUpvotes = function(comment){
                 posts.upvoteComment(post, comment);
+            };
+            postCtrl.incrementDownvotes = function(comment){
+                posts.downvoteComment(post, comment);
             };
         }]);
