@@ -7,8 +7,9 @@
     <span ng-bind="post.upvotes"></span>
         <span style="font-size:20px; margin-left:10px;">
               <span ng-bind="post.title"></span>
-            <span>
-              <a href="#/posts/{{post._id}}">Comments</a>
+            <span ng-bind="post.question"></span>
+            <span>Total
+              <a href="#/posts/{{post._id}}">Comments: </a><span ng-bind="post['comments'].length"></span>
             </span>
         </span>
 </div>
