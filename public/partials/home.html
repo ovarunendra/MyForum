@@ -1,0 +1,34 @@
+<div class="page-header">
+    <h1>My Forum</h1>
+</div>
+
+<div ng-repeat="post in ctrl.posts | orderBy:'-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up"
+              ng-click="ctrl.incrementUpvotes(post)"></span>
+    <span ng-bind="post.upvotes"></span>
+        <span style="font-size:20px; margin-left:10px;">
+              <span ng-bind="post.title"></span>
+            <span>
+              <a href="#/posts/{{post._id}}">Comments</a>
+            </span>
+        </span>
+</div>
+
+<form ng-submit="ctrl.addPost()"
+      style="margin-top:30px;">
+    <h3>Add a new post</h3>
+
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               placeholder="Title"
+               ng-model="ctrl.title">
+    </div>
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               placeholder="Question"
+               ng-model="ctrl.question">
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>

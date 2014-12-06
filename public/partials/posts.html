@@ -1,0 +1,27 @@
+<div class="page-header">
+    <span ng-bind="postCtrl.post.title"></span>
+      <span ng-bind="postCtrl.post.question">
+      </span>
+    </h3>
+</div>
+
+<div ng-repeat="comment in postCtrl.post.comments | orderBy:'-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up"
+          ng-click="postCtrl.incrementUpvotes(comment)"></span>
+    <span ng-bind="comment.upvotes"></span> - by <span ng-bind="comment.author"></span>
+    <span style="font-size:20px; margin-left:10px;">
+      <span ng-bind="comment.body"></span>
+    </span>
+</div>
+<form ng-submit="postCtrl.addComment()"
+      style="margin-top:30px;">
+    <h3>Add a new comment</h3>
+
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               placeholder="Comment"
+               ng-model="postCtrl.body">
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>

@@ -10,7 +10,7 @@ angular.module('myForum', ['ui.router'])
             $stateProvider
                 .state('home', {
                     url: '/home',
-                    templateUrl: '/home.html',
+                    templateUrl: 'partials/home.html',
                     controller: 'MainCtrl as ctrl',
                     resolve: {
                         postPromise: ['posts', function(posts){
@@ -20,7 +20,7 @@ angular.module('myForum', ['ui.router'])
                 })
                 .state('posts', {
                     url: '/posts/{id}',
-                    templateUrl: '/posts.html',
+                    templateUrl: 'partials/posts.html',
                     controller: 'PostsCtrl as postCtrl',
                     resolve: {
                         post: ['$stateParams', 'posts', function($stateParams, posts) {
