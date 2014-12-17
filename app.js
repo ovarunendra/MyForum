@@ -5,13 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
+var session      = require('express-session');
 
-mongoose.connect('mongodb://localhost/forums');
+mongoose.connect('mongodb://localhost:27025/forums');
 require('./models/Posts');
 require('./models/Comments');
+require('./models/Users');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+require('./config/passport');
 
 var app = express();
 
@@ -26,6 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use('/', routes);
 app.use('/users', users);

@@ -27,6 +27,10 @@ angular.module('myForum', ['ui.router'])
                             return posts.getComment($stateParams.id);
                         }]
                     }
+                }).state('register', {
+                    url: '/register',
+                    templateUrl: 'partials/register.html',
+                    controller: 'UserCtrl as userCtrl'
                 });
             $urlRouterProvider.otherwise('home');
         }])
@@ -63,7 +67,7 @@ angular.module('myForum', ['ui.router'])
                 .success(function(data){
                     comment.upvotes += 1;
                 });
-        }
+        };
         obj.downvoteComment = function(post, comment) {
             return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/downvote')
                 .success(function(data){
@@ -71,6 +75,16 @@ angular.module('myForum', ['ui.router'])
                 });
         };
         return obj;
+    }])
+    .factory('users', ['$http', function($http){
+       return {
+           register: function(userData){
+               return $http.post('/users/register', userData)
+                   .success(function(data){
+                       console.log('data', data)
+                   })
+           }
+       };
     }])
     .controller('MainCtrl',['posts',function(posts){
         var ctrl = this;
@@ -111,4 +125,11 @@ angular.module('myForum', ['ui.router'])
             postCtrl.incrementDownvotes = function(comment){
                 posts.downvoteComment(post, comment);
             };
-        }]);
+        }])
+    .controller('UserCtrl', ['users','$state', function(users, $state){
+        var userCtrl = this;
+        userCtrl.register = function(){
+            users.register(userCtrl.signUp);
+            $state.go('home');
+        }
+    }]);
